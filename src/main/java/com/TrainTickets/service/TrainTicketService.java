@@ -14,7 +14,7 @@ public interface TrainTicketService {
 
     TrainTicket getTicketById(Integer id);
 
-    TrainTicket updateTicket(TrainTicket ticket);
+    TrainTicket updateTicket(TrainTicket ticket, Integer id);
 
     void deleteTicket(Integer id);
 }

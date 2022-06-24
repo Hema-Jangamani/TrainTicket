@@ -5,6 +5,8 @@ import com.TrainTickets.model.TrainTicket;
 import com.TrainTickets.model.TrainTicketDto;
 import com.TrainTickets.service.TrainTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,12 +53,18 @@ public class TrainTicketController {
 
     @PutMapping("/editTicket/{id}")
     public Object editTicket(@RequestBody TrainTicket ticket, @PathVariable("id") Integer id){
-        TrainTicket editTicket = this.service.updateTicket(ticket);
+        TrainTicket editTicket = this.service.updateTicket(ticket,id);
         if (ticket.getId().equals(id)){
             return ticket;
         }else {
             return "No ticket found";
         }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateName(@RequestBody TrainTicket ticket, @PathVariable("id") Integer id){
+        TrainTicket ticket1 = service.updateTicket(ticket,id);
+        return new ResponseEntity<>(ticket1, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
